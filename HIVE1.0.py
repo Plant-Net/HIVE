@@ -394,29 +394,29 @@ if __name__ == '__main__':
 
     parser.add_argument("-rc", "--reference_column",
                         help="indicate the name of the column containing the gene names",
-                        type=str,
+                        # type=str,
                         default="ref")
 
     parser.add_argument("-ff", "--file_format",
                         help="indicate the input file/s extension",
-                        type=str,
+                        # type=str,
                         default=".csv")
 
     parser.add_argument("-sep", "--separator",
                         help="indicate the separator character for columns in input data",
-                        type=str,
+                        # type=str,
                         default=",")
 
     parser.add_argument("--minmax",
                         help="indicate wether to apply or not the MinMaxScaler [0,1] range",
                         action="store_true",
-                        type=bool,
+                        # type=bool,
                         default=True)
 
     parser.add_argument("-c", "--rfr_classes",
                         help="indicate the vector corresponding to classes in your experimental design, MAINTAIN THE "
                              "SAMPLE ORDER",
-                        type=list,
+                        # type=list,
                         default=[0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 3, 3, 3, 2, 2, 2, 0, 2, 0, 0,
                                  0, 2, 2, 2, 0, 2])
 
@@ -432,7 +432,7 @@ if __name__ == '__main__':
                         help="indicate a numeric vector with numbers assigned to each sample (DO NOT CONSIDER CONTROLS)"
                              "corresponding to phenotypic characteristics of interest, following their original order, "
                              "to explore the pheno. char. captured by latent features",
-                        type=list,
+                        # type=list,
                         default=[])
 
     parser.add_argument("--deseq2",
@@ -859,9 +859,11 @@ if __name__ == '__main__':
         condition_dir = args.output_dir + "gene_condition_assoc/"
         if not os.path.exists(condition_dir):
             os.makedirs(condition_dir)
+
         l2fc = pd.read_csv(args.deseq2, sep=",", index_col=0)
         l2fc = l2fc.fillna(0)
-        l2fc_abs = abs(l2fc)
+        l2fc_selected = l2fc[l2fc.ref.isin(ranked_selected_genes)]
+        l2fc_abs = abs(l2fc_selected)
 
         inter_cond_diff = l2fc_abs.apply(calc_distance_f, axis=1)
         # reference condition is the condition for which each gene has the max l2fc value
