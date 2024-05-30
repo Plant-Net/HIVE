@@ -55,11 +55,12 @@ python HIVE1.0.py -i /path/to/input_dir/ -o /path/to/output_dir -hz -rc 'ref' -f
 
 To obtain the association of HIVE selected genes to condition, first run the ```calculate_log2fc.R``` script to obtain the log2FoldChange values for each gene, then try this:
 ```
-python HIVE1.0.py -i /path/to/input_dir/ -o /path/to/output_dir -rc 'ref' -ff .csv -sep ',' --minmax -c [0, 0, 0, 1, 1, 1, 2, 2, 2] --shap --deseq2
+python HIVE1.0.py -i /path/to/input_dir/ -o /path/to/output_dir -rc 'ref' -ff .csv -sep ',' --minmax -c [0, 0, 0, 1, 1, 1, 2, 2, 2] --shap --deseq2 /path/to/R/script/output_file
 ```
 or 
 ```
-python HIVE1.0.py -i /path/to/input_dir/ -o /path/to/output_dir -hz -rc 'ref' -ff .csv -sep ',' --minmax -c [0, 0, 0, 1, 1, 1, 2, 2, 2] --shap --deseq2
+python HIVE1.0.py -i /path/to/input_dir/ -o /path/to/output_dir -hz -rc 'ref' -ff .csv -sep ',' --minmax -c [0, 0, 0, 1, 1, 1, 2, 2, 2] --shap --deseq2 /path/to/R/script/output_file
 ```
 
 You can also use all the parameters together.
+
