@@ -6,6 +6,7 @@ The first of three block of HIVE is a Variational Auto Encoder and it requires a
 It is implemented and tested on python 3.10.9.
 Important library version are:
 - tensorflow v2.11.0
+- sklearn v1.2.2
 - numpy v1.24.2
 
 # Usage
