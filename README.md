@@ -53,7 +53,7 @@ Please install the remaining imports that can be missing, if not already done: `
 ```
 For a demo trial of yHIVE you can find in the ```./yHIVE_demo/data/``` folder a possible usecase from our study, please run the following commands replacing the parameters accordingly, if needed:
 ```
-python yHIVE1.0.py -i ./yHIVE_demo/data/ -o --minmax
+python yHIVE1.0.py -i ./yHIVE_demo/data/ --minmax
 ```
 or, with a specific case with the need for horizontal integration of data
 ```
