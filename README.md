@@ -64,7 +64,7 @@ If no horizontal integration is needed (e.g. you already have the intefrated dat
 **If you need to modify the number of epochs or the number of neurons in each of the three layers of our implementation of VAE, use the arguments ```-ep```, ```-en```, ```-de```** like reported in the hepling message.
 
 ## gHIVE 
-This script will perform the extraction of genes mostly related to the plant-stress response and provides the association to condition/s for each of the extracted genes.
+With the application of a Random Forest Regression and SHAP importance score, this script will perform the extraction of genes mostly related to the plant-stress response. It also provides the association to condition/s for each of the extracted genes.
 
 ### Python requirements
 It is implemented and tested on python 3.10.9.
@@ -103,7 +103,14 @@ For a demo trial of gHIVE you can find possible usecase files in the ```./gHIVE_
 ```
 python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -fc ./gHIVE_demo/fold_change.tsv -M -cM 'as3' 'as6' 'as9' -cM 'ad3' 'ad6' 'ad9' -fM 'as' 'ad'
 ```
-In general ```gHIVE1.0.py``` takes in input results form ```yHIVE1.0.py``` like ```filtered_input_data.tsv```, ```minmax_scaled_input_data.tsv```, and ```latent_space.tsv```. The latest arguments are needed only in the case you have to merge some conditions when calculating the association of the genes with the conditions. In this case we have the biotic stress splitted into 3 time points but in this phase their association can be considered as a whole so we merged the three time points of *A. stenosperma* (```'as3' 'as6' 'as9'```) into a single column (```'as'```) and the other three from *A. duranensis* (```'ad3' 'ad6' 'ad9'```) into the other (```'ad'```). 
+In general ```gHIVE1.0.py``` takes in input results form ```yHIVE1.0.py``` like ```filtered_input_data.tsv```, ```minmax_scaled_input_data.tsv```, and ```latent_space.tsv```. 
+
+For more specific case, please also indicate the belonging classes of the samples for the stratifiedKFold in the Random Forest Regression by:
+```
+python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -c 0 0 1 1 1 2 2 -fc ./gHIVE_demo/fold_change.tsv -M -cM 'as3' 'as6' 'as9' -cM 'ad3' 'ad6' 'ad9' -fM 'as' 'ad'
+```
+
+The latest arguments are needed only in the case you have to merge some conditions when calculating the association of the genes with the conditions. In this case we have the biotic stress splitted into 3 time points but in this phase their association can be considered as a whole so we merged the three time points of *A. stenosperma* (```'as3' 'as6' 'as9'```) into a single column (```'as'```) and the other three from *A. duranensis* (```'ad3' 'ad6' 'ad9'```) into the other (```'ad'```). 
 
 **Please notice that the argument ```-cM``` has to be used multiple times according to the numebr of merged columns you want to create**. 
 
