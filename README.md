@@ -100,14 +100,25 @@ Please install the remaining imports that can be missing, if not already done: `
                         list of names of final merged columns
 ```
 For a demo trial of gHIVE you can find possible usecase files in the ```./gHIVE_demo/``` folder. Please run the following commands replacing the parameters accordingly, if needed:
+
+To only obtain the gene selection, use:
 ```
-python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -fc ./gHIVE_demo/fold_change.tsv -M -cM 'as3' 'as6' 'as9' -cM 'ad3' 'ad6' 'ad9' -fM 'as' 'ad'
+python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv
+```
+
+To also obtain the association to condition, use the ```-ga``` and following arguments:
+```
+python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -ga -fc ./gHIVE_demo/fold_change.tsv -M -cM 'as3' 'as6' 'as9' -cM 'ad3' 'ad6' 'ad9' -fM 'as' 'ad'
 ```
 In general ```gHIVE1.0.py``` takes in input results form ```yHIVE1.0.py``` like ```filtered_input_data.tsv```, ```minmax_scaled_input_data.tsv```, and ```latent_space.tsv```. 
 
 For more specific case, please also indicate the belonging classes of the samples for the stratifiedKFold in the Random Forest Regression by:
 ```
-python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -c 0 0 1 1 1 2 2 -fc ./gHIVE_demo/fold_change.tsv -M -cM 'as3' 'as6' 'as9' -cM 'ad3' 'ad6' 'ad9' -fM 'as' 'ad'
+python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -c 0 0 1 1 1 2 2
+```
+or
+```
+python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -c 0 0 1 1 1 2 2 -ga -fc ./gHIVE_demo/fold_change.tsv -M -cM 'as3' 'as6' 'as9' -cM 'ad3' 'ad6' 'ad9' -fM 'as' 'ad'
 ```
 
 The latest arguments are needed only in the case you have to merge some conditions when calculating the association of the genes with the conditions. In this case we have the biotic stress splitted into 3 time points but in this phase their association can be considered as a whole so we merged the three time points of *A. stenosperma* (```'as3' 'as6' 'as9'```) into a single column (```'as'```) and the other three from *A. duranensis* (```'ad3' 'ad6' 'ad9'```) into the other (```'ad'```). 
