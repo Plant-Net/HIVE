@@ -10,13 +10,13 @@ Want to take a look to our manuscript first? Here it is: https://doi.org/10.1101
 # Scripts 
 As in the HIVE workflow, here we furnish 3 different scripts named according to the color of the "HIVEmetropolitan-lines" they refer their analysis to: yHIVE1.0.py for the yellow-line, bHIVE1.0.py for the blue-line, and gHIVE1.0.py for the green-line.
 
-# yHIVE 
+## yHIVE 
 This script will perform horizontal integrazion of data (if required), implement and evaluate a Variational AutoEncoder and batch-effect reduction.
 
-## System requirements
+### System requirements
 It requires at least 8 GB of free memory space to run correctly.
 
-## Python requirements
+### Python requirements
 It is implemented and tested on python 3.10.9.
 Important libraries and versions are:
 - tensorflow v2.11.0
@@ -24,7 +24,7 @@ Important libraries and versions are:
 - numpy v1.24.2
 Please install the remaining imports if not already done.
 
-## Usage
+### Usage
 ```python yHIVE1.0.py -h``` will give you the following help message:
 
 ```
@@ -62,10 +62,10 @@ The batch parameter ```-b``` allows you to assign a label to each sample coming 
 If no horizontal integration is needed (e.g. you already have the intefrated data), just remove the ```-hz``` argument at the beginning of the command.
 **If you need to modify the number of epochs or the number of neurons in each of the three layers of our implementation of VAE, use the arguments ```-ep```, ```-en```, ```-de```** like reported in the hepling message.
 
-# gHIVE 
+## gHIVE 
 This script will perform the extraction of genes mostly related to the plant-stress response and provides the association to condition/s for each of the extracted genes.
 
-## Python requirements
+### Python requirements
 It is implemented and tested on python 3.10.9.
 Important libraries and versions are:
 - shap (tested on v0.46.0)
@@ -73,7 +73,7 @@ Important libraries and versions are:
 - itertools
 Please install the remaining imports if not already done.
 
-## Usage 
+### Usage 
 ```python gHIVE1.0.py -h``` will give you the following help message:
 
 ```
@@ -115,17 +115,17 @@ This script automatically use SHAP score to assign an importance score to each g
 python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_demo/yHIVE_minmax_scaled_input_data.tsv -ls ./gHIVE_demo/yHIVE_latent_space.tsv -fc ./gHIVE_demo/fold_change.tsv --gini
 ```
 
-# bHIVE 
+## bHIVE 
 This script will compute the correlation of the Latent Features to the phenotypic conditions. Depending on the number of phenotype you want to correlate with the Latent Features (excluding the controls), it will either perform a point-biserial correlation or a Kruskal-Wallis test followed by the Dunn's test.
 
-## Python requirements
+### Python requirements
 It is implemented and tested on python 3.10.9.
 Important libraries and versions are:
 - scikit_posthocs (tested on v0.11.1)
 
 Please install the remaining imports if not already done.
 
-## Usage 
+### Usage 
 ```python bHIVE1.0.py -h``` will give you the following help message:
 ```
  -h, --help            show this help message and exit
