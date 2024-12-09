@@ -41,7 +41,7 @@ Please install the remaining imports that can be missing, if not already done: `
                         indicate the input file/s extension
   -sep SEPARATOR, --separator SEPARATOR
                         indicate the separator character for columns in input data
-  --minmax              indicate wether to apply or not the MinMaxScaler [0,1] range
+  --minmax              indicate whether to apply or not the MinMaxScaler [0,1] range
   -ep EPOCHS, --epochs EPOCHS
                         indicate the number of epochs for the VAE training
   -en ENCODER [ENCODER ...], --encoder ENCODER [ENCODER ...]
@@ -91,6 +91,8 @@ Please install the remaining imports that can be missing, if not already done: `
   -c RFR_CLASSES [RFR_CLASSES ...], --rfr_classes RFR_CLASSES [RFR_CLASSES ...]
                         indicate the vector corresponding to classes in your experimental design for the random forest regression step, MAINTAIN THE SAMPLE ORDER
   --gini                indicate if you want to use GINI as feature importance calculation for HIVE gene selection
+  -ga, --gene_association
+                        indicate whether or not to perform also the selection (e.g. gene) association to condition
   -fc FOLD_CHANGE, --fold_change FOLD_CHANGE
                         path to log2FoldChange file of HIVE selected genes
   -M, --merge_cols      indicate wether there is the need to merge columns of l2fc matrix for final molecule association to condition, e.g. replicates
@@ -123,7 +125,7 @@ python gHIVE1.0.py -f ./gHIVE_demo/yHIVE_filtered_input_data.tsv -mm ./gHIVE_dem
 
 The latest arguments are needed only in the case you have to merge some conditions when calculating the association of the genes with the conditions. In this case we have the biotic stress splitted into 3 time points but in this phase their association can be considered as a whole so we merged the three time points of *A. stenosperma* (```'as3' 'as6' 'as9'```) into a single column (```'as'```) and the other three from *A. duranensis* (```'ad3' 'ad6' 'ad9'```) into the other (```'ad'```). 
 
-**Please notice that the argument ```-cM``` has to be used multiple times according to the numebr of merged columns you want to create**. 
+**Please notice that the argument ```-cM``` has to be used multiple times according to the number of merged columns you want to create**. 
 
 If there is no need to merge conditions, simply remove the latest 3 arguments from the command line, thus:
 ```
