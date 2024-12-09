@@ -22,7 +22,8 @@ Important libraries and versions are:
 - tensorflow v2.11.0
 - sklearn v1.2.2
 - numpy v1.24.2
-Please install the remaining imports if not already done.
+  
+Please install the remaining imports that can be missing, if not already done: ```pandas, scipy```
 
 ### Usage
 ```python yHIVE1.0.py -h``` will give you the following help message:
@@ -71,7 +72,8 @@ Important libraries and versions are:
 - shap (tested on v0.46.0)
 - sklearn v1.2.2
 - itertools
-Please install the remaining imports if not already done.
+  
+Please install the remaining imports that can be missing, if not already done: ```pandas, numpy, matplotlib, collections, time```
 
 ### Usage 
 ```python gHIVE1.0.py -h``` will give you the following help message:
@@ -123,7 +125,7 @@ It is implemented and tested on python 3.10.9.
 Important libraries and versions are:
 - scikit_posthocs (tested on v0.11.1)
 
-Please install the remaining imports if not already done.
+Please install the remaining imports that can be missing, if not already done: ```pandas, numpy, math, scipy, sklearn```
 
 ### Usage 
 ```python bHIVE1.0.py -h``` will give you the following help message:
