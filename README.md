@@ -1,12 +1,13 @@
+![small_ygbHIVE_logo](https://github.com/user-attachments/assets/5cd6fd13-c8f4-48c9-a21a-52498ee499e8)
 
-![ygb_HIVE_logo_encr](https://github.com/user-attachments/assets/3424c15e-8d3a-4501-a18e-b7fba998fe15)
 
 HIVE is a novel tool to perform unpaired multi-transcriptomics data integration and to retrieve important features acting during plant-stress response. 
 
 Want to take a look to our manuscript first? Here it is: https://doi.org/10.1101/2024.03.04.583290.
 
 # HIVE workflow
-![fig1_censored](https://github.com/user-attachments/assets/53dbb2b0-f696-4109-b61f-4290964a00a1)
+![small_HIVE_workflow](https://github.com/user-attachments/assets/4e08a3a4-9d4c-472b-930f-599b94a459eb)
+
 
 
 # Scripts 
