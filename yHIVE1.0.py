@@ -288,7 +288,7 @@ def msle_loss_f(data, encoder_input, outputs):
     return msle
 
 
-def kl_loss_f(ld_mean, ld_log_var, kl_loss_weight=0.5):
+def kl_loss_f(ld_mean, ld_log_var, beta=1):
     """Calculate the Kullback-Leibler loss
     
     Parameters
@@ -303,7 +303,7 @@ def kl_loss_f(ld_mean, ld_log_var, kl_loss_weight=0.5):
     """
     kl_loss = 1 + ld_log_var - keras.backend.square(ld_mean) - keras.backend.exp(ld_log_var)
     kl_loss = keras.backend.sum(kl_loss, axis=-1)
-    kl_loss *= -kl_loss_weight
+    kl_loss *= -0.5 * beta
     return kl_loss
 
 
@@ -512,6 +512,10 @@ if __name__ == '__main__':
                         nargs="+",
                         type=int,
                         default=[500, 1000, 5000])
+
+    parser.add_argument("--beta",
+                    help="beta regularization value to mitigate KL-collapse. If not specified the beta=1",
+                    type=float)                    
     
     parser.add_argument("-b", "--batches",
                         help="multi-hot encoding vector in which you assign the same value to samples coming from the same batch, e.g. 0 0 0 1 1 1 2 2",
@@ -531,12 +535,13 @@ if __name__ == '__main__':
         print(args.input_dir)
         data, meta_info = horizontal_integration(args.input_dir, str(args.reference_column), str(args.file_format), str(args.separator))
         
-        meta_info.to_csv(f"{args.output_dir}yHIVE_input_data_batches.tsv", sep="\t", index=False)
+        data.to_csv(f"{args.output_dir}Hintegrated_data.tsv", sep="\t", index=False)
+        # meta_info.to_csv(f"{args.output_dir}yHIVE_input_data_batches.tsv", sep="\t", index=False)
         filt_data = data.copy() 
         # prefilter the input data  
         filt_data = prefiltering_f(data)
         filt_data.set_index(data.columns[0], inplace=True)
-        filt_data.to_csv(f"{args.output_dir}yHIVE_filtered_input_data.tsv", sep="\t")
+        # filt_data.to_csv(f"{args.output_dir}yHIVE_filtered_input_data.tsv", sep="\t")
     else:
         for el in os.listdir(args.input_dir):
             if el.endswith(str(args.file_format)):
@@ -572,7 +577,12 @@ if __name__ == '__main__':
     combine_structure = decoder(encoder(ei)[2])
 
     msle = msle_loss_f(tr_data, ei, combine_structure)
-    kl_loss = kl_loss_f(sinput[0], sinput[1])[0]
+   
+    if args.beta:
+        kl_loss = kl_loss_f(sinput[0], sinput[1], beta=args.beta)[0]
+    else:
+        kl_loss = kl_loss_f(sinput[0], sinput[1])[0]
+  
     vae_loss = vae_loss_f(msle, kl_loss)
 
     # Variational AutoEncoder initialization
